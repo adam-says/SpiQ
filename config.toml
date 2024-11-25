@@ -1,0 +1,40 @@
+# QSpiQ - config.toml
+#
+# This is the configuration file for QSpiQ.
+# It is written in TOML format.
+#
+# Nov 2024, M. Giugliano
+
+[detection]
+# Filtering for the detection of spikes [Hz]
+fmin = 400.0
+fmax = 3000.0
+
+# Detection threshold, in units of std dev (of the noise)
+stdmin = 5.0        # 5 times the std dev
+stdmax = 10000.0    # 10000 times the std dev (i.e. no upper limit)
+
+# Positive, negative threshold crossings, or both
+type = "both" # "pos", "neg", "both"
+
+# Refractory period or detection dead-time (ms)
+refractory = 2.5
+
+[sorting]
+# Filtering for the sorting of spikes [Hz] (optional)
+fmin = 400.0
+fmax = 3000.0
+
+# Spike shape extraction - time window (ms)
+delta_pre  = 1.0    # ms
+delta_post = 2.5    # ms
+
+# Interpolation factor for the spike shape
+interpolation_factor = 2
+
+# Interpolation with cubic spline [y/n]
+cubic_spline = "y"
+
+# Save spike shapes [y/n]
+save_shapes = "y"
+
