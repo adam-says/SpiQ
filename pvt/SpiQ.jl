@@ -1,10 +1,16 @@
+#!/usr/bin/env julia
+# -*- coding: utf-8 -*-
+
+# The script is part of the QSpiQ project.
 #
-#
-#
+# Nov 2024, M. Giugliano (mgiugliano@gmail.com)
+# github.com/mgiugliano
+
 
 module SpiQ
 
 using HDF5, DSP, Statistics, JLD2, DelimitedFiles # Pkgs on ALL workers
+
 
 function bandpass(data::Array{Float64,1}, lowcut::Float64, highcut::Float64, fs::Float64)
     nyquist = 0.5 * fs;
