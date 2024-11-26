@@ -32,6 +32,13 @@ Julia packages (Distributed, HDF5, TOML, DSP, Statistics, JLD2, DelimitedFiles) 
 
 Work in progress. See the ```install.sh``` script.
 
+Both the ```Manifest.toml``` and the ```Project.toml``` are included. This allows to install the project dependencies in a, hopefully, reproducible way. The command to perform the pre-compilation is also included.
+
+```julia
+julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+```
+Note: as we aim at reproducing rigorously a fixed state of all packages used by the project, we are also including the Manifest.toml besides the Project.toml.
+
 ## Operation and features
 
 - SπQ is invoked as: ```julia process.jl datafile.h5```

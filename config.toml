@@ -1,12 +1,22 @@
-# QSpiQ - config.toml
+# SπQ - config.toml
 #
 # This is the configuration file for QSpiQ.
 # It is written in TOML format.
 #
 # Nov 2024, M. Giugliano
 
+[lfp]
+save_lfp = "n"  # Extract/Save the LFP [y/n]
+# Raw data filtering and subsampling for the LFP.
+# Max cut-off frequency [Hz] for low-pass filtering.
+fmax = 100.0
+rate = 1000.0
+
+
 [detection]
-# Filtering for the detection of spikes [Hz]
+detect = "y"    # Detect spikes [y/n]
+# Raw data filtering for the detection of spikes [Hz]
+# Min and max cut-off frequencies for band-pass filtering.
 fmin = 400.0
 fmax = 3000.0
 
@@ -21,6 +31,7 @@ type = "both" # "pos", "neg", "both"
 refractory = 2.5
 
 [sorting]
+save_shapes = "y"
 # Filtering for the sorting of spikes [Hz] (optional)
 fmin = 400.0
 fmax = 3000.0
@@ -35,6 +46,4 @@ interpolation_factor = 2
 # Interpolation with cubic spline [y/n]
 cubic_spline = "y"
 
-# Save spike shapes [y/n]
-save_shapes = "y"
 
