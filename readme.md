@@ -5,11 +5,13 @@ SπQ is a batch and parallel preprocessor for electrophysiology extracellular mu
 It leverages over the previous published work (QSpike Tools and WaveClus) and employs julia and hdf5 tools to quickly perform filtering, spike detection, extraction, and shape extraction.
 
 It is well suited to be run on HPC infrastructures and aims at minimalism.
-As in UNIX phylosophy, it is supposed to perform a series of operation well, but as a collection of tools.
+As in UNIX philosophy, it is supposed to perform a series of operation well, but as a collection of tools.
 
+The documentation is [here](https://spiq.readthedocs.io/en/latest/), although still work in progress!
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 <img src="/img/logo.png?raw=true" alt="SpQ logo" height="200px">
+
 
 ## Motivations
 
