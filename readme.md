@@ -12,6 +12,7 @@ The documentation is [here](https://spiq.readthedocs.io/en/latest/), although st
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 <img src="/img/logo.png?raw=true" alt="SpQ logo" height="200px">
 
+TEST FILE (for your eyes only, MCS format) [here](https://www.dropbox.com/scl/fi/k1gw5sckgigemr4dputcp/aaa.h5?rlkey=sy5n6pkjkwt0cxkplbohy4czc&dl=0n)
 
 ## Motivations
 
