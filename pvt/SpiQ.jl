@@ -27,7 +27,7 @@ end # bandpass -----------------------------------
 function lowpass_and_dec(data::Array{Float64,1}, cutoff::Float64, rate::Float64, fs::Float64)
     nyquist = 0.5 * fs;
     low = cutoff / nyquist;
-    TYPE   = Lowpass(fmax * tmp);
+    TYPE   = Lowpass(low);
     DESIGN = Butterworth(5);
     filt   = digitalfilter(TYPE, DESIGN);
     xf = filtfilt(filt, data);

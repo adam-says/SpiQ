@@ -6,7 +6,7 @@
 # Nov 2024, M. Giugliano
 
 [lfp]
-save_lfp = "n"  # Extract/Save the LFP [y/n]
+save_lfp = "y"  # Extract/Save the LFP [y/n]
 # Raw data filtering and subsampling for the LFP.
 # Max cut-off frequency [Hz] for low-pass filtering.
 fmax = 100.0
