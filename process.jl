@@ -11,7 +11,7 @@ using HDF5, Distributed, TOML, DSP, Statistics, JLD2, DelimitedFiles
 
 #-- FILE HANDLING & START-UP ------------------
 if length(ARGS) != 1 # Check input arguments.
-    @warn "Usage: process.jl /path/to/MCS_h5file.h5";
+    @warn "Usage: process.jl /path/to/DATA_file.h5/.brw";
     exit(1);
 end
 
@@ -24,15 +24,21 @@ else
 end
 
 #-- OUTPUT FOLDER -----------------------------
-OUTPUT = replace(filename, ".h5" => ".dat")
+# Extract the extension of the file
+ext = splitext(filename)[2] # e.g. ".h5" or ".brw"
+OUTPUT = replace(filename, ext => ".dat")
 if isdir(OUTPUT)     # OUTPUT folder already exists
     rm(OUTPUT, recursive=true);
 end
 # Sleep for 20 seconds to allow the deletion of the folder
 mkdir(OUTPUT);
 #-- METADATA ----------------------------------
-run(`bash ./pvt/get_info.sh $filename`)
-metafile = replace(filename, ".h5" => ".toml")
+if ext == ".h5"
+    run(`bash ./pvt/get_info_mcs.sh $filename`)
+else
+    run(`bash ./pvt/get_info_brw.sh $filename`)
+end
+metafile = replace(filename, ext => ".toml")
 base = basename(metafile)
 run(`mv ./$base $OUTPUT/meta.toml`)
 run(`cp ./config.toml $OUTPUT/config.toml`)

@@ -6,6 +6,13 @@
 SpiQ documentation
 ==================
 
+SpiQ is a Julia package for performing filtering, peak-detection, LFP/MUA extraction, and spike sorting.
+It is still largely work in progress, but the goal is to provide a comprehensive set of tools for processing
+suitable for electrophysiological data in our lab.
+
+.. note::
+   This is a work in progress. The documentation is incomplete and the package is still under development.
+
 Add your content using ``reStructuredText`` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
 documentation for details.

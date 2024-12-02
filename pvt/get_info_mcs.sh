@@ -72,6 +72,8 @@ echo "" >> $OUTPUT
 echo "[info]" >> $OUTPUT
 #-----------------------------------------------------
 
+echo "type = MCS" >> $OUTPUT
+
 # Extracting the desired attributes from the hdf5 file requires a bit of
 # bash-fu. We will use h5dump to extract the attributes, and awk to
 # process the output. We will then write the attributes to a .toml file.
