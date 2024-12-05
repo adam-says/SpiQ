@@ -74,7 +74,7 @@ echo "[info]" >> $OUTPUT
 
 # If the file extension is brw, then it is a 3brain file.
 if [[ $1 == *.brw ]]; then
-    echo "type = 3BRAIN" >> $OUTPUT
+    echo 'type = "3BRAIN"' >> $OUTPUT
 fi
 
 # Extracting the desired attributes from the hdf5 file requires a bit of
