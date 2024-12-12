@@ -88,11 +88,11 @@ tmp = SpQ.parse_toml_files(OUTPUT);  # Parse config.toml and meta.toml
 if ext == ".h5" # Set the dataset name according to the file extension (MCS vs 3BRAINS)
     datasetname = "Data/Recording_0/AnalogStream/Stream_0/ChannelData";
 else
-    datasetname = "Data";
+    datasetname = "Data"; # 3BRAINS - check this
 end
 #----------------------------------------------
 
-MEM = SpQ.meminfo_julia();
+#MEM = SpQ.meminfo_julia();
 @info "Preprocessing started..."
 #@info "$(MEM) GB in use"
 #-- MAIN LOOP ----------------------------------
@@ -109,7 +109,7 @@ K = Int(ceil(Nchans / n_workers));          # Channels per worker
         for chan in start_chan:end_chan     # Loop over the channels assigned to that worker
             SpQ.preproc_chan(filename, chan, datasetname);
             GC.gc(); # Force garbage collection
-            MEM = SpQ.meminfo_julia()
+            #MEM = SpQ.meminfo_julia()
             #@info "$(MEM) GB in use"
         end
     end
