@@ -46,4 +46,15 @@ interpolation_factor = 2
 # Interpolation with cubic spline [y/n]
 cubic_spline = "y"
 
+[bursting]
+burst_bin = 50.0       # ms - bin size for the burst detection
+pelt_factor = 0.05     # for burst's beginning/end as 5% of peak
+burst_th_mode = "amo"  # "dyn", "syn", "fix", or "amo" - thr. mode
+sn_ratio_threshold = 5.0 # SNR threshold
+burst_threshold = 1000.0  # fixed threshold
+minimal_threshold = 0.0 # minimal value
+
+
+
+
 

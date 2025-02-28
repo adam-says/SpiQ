@@ -3,13 +3,12 @@
 
 # crunch.jl - sample script to preprocess electrophysiological data
 #
-# SpQ - QSpike Tools reinvented - electrophysiology extracellular multichannel batch and parallel preprocessor
+# SpQEphysTools - QSpike Tools reinvented - electrophysiology extracellular multichannel batch and parallel preprocessor
 #    Copyright (C) 2024 Michele GIUGLIANO <michele.giugliano@unimore.it> and contributors.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    the Free Software Foundation.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -56,8 +55,8 @@ n_workers = length(w);    # Number of workers available
 #----------------------------------------------
 
 # Now that we have the workers, we can import SpQ...
-@everywhere using SpQ                # Import SpQ in all workers
-using SpQ                            # Import SpQ in the main process
+@everywhere using SpQEphysTools                # Import SpQ in all workers
+using SpQEphysTools                            # Import SpQ in the main process
 
 #-- OUTPUT FOLDER -----------------------------
 ext = splitext(filename)[2]               # e.g. ".h5" or ".brw" - extension
@@ -81,8 +80,8 @@ cp("config.toml", OUTPUT * "/config.toml", force=true)
 
 
 #-- TOML --------------------------------------
-tmp = SpQ.parse_toml_files(OUTPUT);  # Parse config.toml and meta.toml
-@everywhere SpQ.s = $tmp;         # Send s to all workers
+tmp = SpQEphysTools.parse_toml_files(OUTPUT);  # Parse config.toml and meta.toml
+@everywhere SpQEphysTools.s = $tmp;         # Send s to all workers
 @info "TOMLs acquired and broadcasted!";
 
 if ext == ".h5" # Set the dataset name according to the file extension (MCS vs 3BRAINS)
@@ -92,11 +91,11 @@ else
 end
 #----------------------------------------------
 
-#MEM = SpQ.meminfo_julia();
+#MEM = SpQEphysTools.meminfo_julia();
 @info "Preprocessing started..."
 #@info "$(MEM) GB in use"
 #-- MAIN LOOP ----------------------------------
-Nchans = SpQ.s.Nchans;                      # Number of channels
+Nchans = SpQEphysTools.s.Nchans;                      # Number of channels
 #Nchans = 1 # Just to test
 
 @info "$(Nchans) chans distributed over $(n_workers) workers."
@@ -107,9 +106,9 @@ K = Int(ceil(Nchans / n_workers));          # Channels per worker
         start_chan = (i - 1) * K + 1;
         end_chan = min((i * K), Nchans);
         for chan in start_chan:end_chan     # Loop over the channels assigned to that worker
-            SpQ.preproc_chan(filename, chan, datasetname);
+            SpQEphysTools.preproc_chan(filename, chan, datasetname);
             GC.gc(); # Force garbage collection
-            #MEM = SpQ.meminfo_julia()
+            #MEM = SpQEphysTools.meminfo_julia()
             #@info "$(MEM) GB in use"
         end
     end
@@ -119,13 +118,13 @@ K = Int(ceil(Nchans / n_workers));          # Channels per worker
 #        start_chan = (i - 1) * K + 1;
 #        end_chan = min((i * K), Nchans);
 #        for chan in start_chan:end_chan     # Loop over the channels assigned to that worker
-#            SpQ.preproc_chan(filename, chan, datasetname);
+#            SpQEphysTools.preproc_chan(filename, chan, datasetname);
 #        end
 #    end
 
 @info "Tide-up output..."
-SpQ.tideup_output(OUTPUT); # Merge, organise, and tide up all output files
+SpQEphysTools.tideup_output(OUTPUT); # Merge, organise, and tide up all output files
 
-#SpQ.meminfo_julia();
+#SpQEphysTools.meminfo_julia();
 
 @info "Preprocessing completed."
