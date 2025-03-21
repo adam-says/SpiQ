@@ -56,8 +56,9 @@ We then install Julia [4], using the juliaup [5] cross-platform installer and ve
 manager.
 
 To install Julia,
-- type (fromt he command line of the terminal)
+- type (from he command line of the terminal)
  > brew install juliaup
+
  > juliaup add release
 
 Finally, download the latest version of the SpiQ script collection [6], by using git.
