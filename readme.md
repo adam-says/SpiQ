@@ -69,8 +69,11 @@ Note: we assumed your login name (corresponding to an already existing folder on
 To install SpiQ, we use git to "clone" its GitHub "repository"
 - type (from the command line of the terminal)
  > mkdir -p /Users/mikey/data_analysis
+
  > cd /Users/mikey/data_analysis
+
  > git clone https://github.com/mgiugliano/SpiQ
+
  > cd SpiQ
 
 

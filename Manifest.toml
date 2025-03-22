@@ -2,7 +2,7 @@
 
 julia_version = "1.11.4"
 manifest_format = "2.0"
-project_hash = "7a5061ec5e2b51161ba13379da6e6940491bfe50"
+project_hash = "3f6eabf743aabfbdff7f7c753c1e6dc5791f2c58"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -145,9 +145,9 @@ version = "0.6.3"
 
 [[deps.DSP]]
 deps = ["Bessels", "FFTW", "IterTools", "LinearAlgebra", "Polynomials", "Random", "Reexport", "SpecialFunctions", "Statistics"]
-git-tree-sha1 = "60b9e054b777bb8bf0fae29b1c9d17f6876b2b44"
+git-tree-sha1 = "0c8a70a69036d8f3a2426d768d30144547cd73c0"
 uuid = "717857b8-e6f2-59f4-9121-6e50c889abd2"
-version = "0.8.2"
+version = "0.8.3"
 
     [deps.DSP.extensions]
     OffsetArraysExt = "OffsetArrays"
@@ -947,11 +947,11 @@ version = "1.2.1"
 
 [[deps.SpQEphysTools]]
 deps = ["DSP", "DelimitedFiles", "HDF5", "JLD2", "Parameters", "Plots", "Statistics", "StatsBase", "TOML"]
-git-tree-sha1 = "2e4a46a0010d9f09657fa117c09e32131a211a19"
+git-tree-sha1 = "0c86b7c3927dc72d3d00002d357f258378271601"
 repo-rev = "main"
 repo-url = "/Users/michi/Library/CloudStorage/Dropbox/Pvt/dev/1_SpiQ_PROJECT/SpQEphysTools.jl"
 uuid = "3cf761ad-e7e3-472c-b6ca-3dfc9dcba960"
-version = "1.1.0"
+version = "1.1.1"
 
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
