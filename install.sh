@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+### WORK IN PROGRESS ----------------------
+
+
 #SOFTWARE_DIR=$HOME/sw
 SOFTWARE_DIR=./swTestInstall
 

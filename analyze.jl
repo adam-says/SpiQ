@@ -54,8 +54,8 @@ n_workers = length(w);    # Number of workers available
 # Now that we have the workers, we can import SpQ...
 @everywhere using SpQEphysTools                # Import SpQ in all workers
 using SpQEphysTools                            # Import SpQ in the main process
-@everywhere include("postprocessing.jl")          # Import postprocess.jl in all workers
-include("postprocessing.jl")                      # Import postprocess.jl in the main process
+#@everywhere include("postprocessing.jl")          # Import postprocess.jl in all workers
+#include("postprocessing.jl")                      # Import postprocess.jl in the main process
 
 #-- DATA ANALYSIS -----------------------------
 @info "Starting postprocessing analysis...";
@@ -80,31 +80,24 @@ K = Int(ceil(nExps / n_workers)); # *.dat per worker
         @info "Processing $(fname) on worker $(i)"
         cp("./config.toml", joinpath(fname, "config.toml"), force=true)
         rm(joinpath(fname, "analysed.txt"), force=true) # Remove the analysed.txt file
-        n = active_el(fname, 0.02)
+        # If there is no spk.txt or no SPK/spk_*.txt, skip it
+        if !isfile(joinpath(fname, "spk.txt"))
+            @warn "$(fname) has no spk.txt!"
+            continue
+        end
+        n = SpQEphysTools.active_el(fname, 0.02)
         @info "Number of active electrodes: $(n)"
-        m, btimes = extract_bursts(fname, n, 20.0)
+        m, btimes = SpQEphysTools.extract_bursts(fname, n, 20.0)
         @info "Number of bursts: $(m)"
         if m > 0
             #plot_raster(fname, 1.0, false, btimes) # was 0.15
-            plot_raster(fname, 0.2, false) # was 0.15
+            SpQEphysTools.plot_raster(fname, 0.2, false) # was 0.15
         else
-           plot_raster(fname, 0.2, false) # was 0.15
-       end
-        plot_frequencies(fname, 0.2, false)
-
-        #SpQEphysTools.analyze(fname);
+           SpQEphysTools.plot_raster(fname, 0.2, false) # was 0.15
+        end
+        SpQEphysTools.plot_frequencies(fname, 0.2, false)
     end
 end
-#@time for i = 1:n_workers
-#    start = (i-1)*K + 1;
-#    stop = min(i*K, nExps);
-#    for j = start:stop # Loop over the *.dat subfolders
-#        fname = joinpath(pathname, readdir(pathname)[j]);
-#        @info "Processing $(fname) on worker $(i)";
-#        plot_raster(fname, 0.25, true);
-#        #SpQEphysTools.analyze(fname);
-#    end
-#end
 @info "Postprocessing analysis completed.";
 
 #----------------------------------------------
