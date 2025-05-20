@@ -120,7 +120,7 @@ BEGIN {
 {
   for (i = 1; i <= length(keysArr); i++) {
     if ($0 ~ "\""keysArr[i]"\"") {
-        print keysArr[i] " = " $3
+        print keysArr[i] " = " "\""$3"\""  
       }
   }
 }'  >> $OUTPUT
