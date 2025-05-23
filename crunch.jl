@@ -86,8 +86,10 @@ tmp = SpQEphysTools.parse_toml_files(OUTPUT);  # Parse config.toml and meta.toml
 
 if ext == ".h5" # Set the dataset name according to the file extension (MCS vs 3BRAINS)
     datasetname = "Data/Recording_0/AnalogStream/Stream_0/ChannelData";
-else
-    datasetname = "Data"; # 3BRAINS - check this
+   
+elseif ext == ".brw"
+    datasetname = "Well_A1/Raw"; # 3BRAINS
+
 end
 #----------------------------------------------
 
@@ -99,7 +101,9 @@ Nchans = SpQEphysTools.s.Nchans;                      # Number of channels
 #Nchans = 1 # Just to test
 
 @info "$(Nchans) chans distributed over $(n_workers) workers."
-K = Int(ceil(Nchans / n_workers));          # Channels per worker
+K =  Int(ceil(Nchans / n_workers));          # Channels per worker
+# For troubleshooting use:
+# K = 1; # Just to test
 
 # Parallel loop over the workers - each worker processes K channels
 @sync @distributed for i in 1:n_workers

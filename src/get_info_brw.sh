@@ -120,8 +120,19 @@ BEGIN {
 {
   for (i = 1; i <= length(keysArr); i++) {
     if ($0 ~ "\""keysArr[i]"\"") {
-        print keysArr[i] " = " "\""$3"\""  
+      # If $3 is a number, print as is
+      if ($3 ~ /^-?[0-9.]+$/) {
+        print keysArr[i] " = " $3
       }
+      # If $3 already has quotes, print as is
+      else if ($3 ~ /^".*"$/) {
+        print keysArr[i] " = " $3
+      }
+      # Otherwise, add quotes
+      else {
+        print keysArr[i] " = \"" $3 "\""
+      }
+    }
   }
 }'  >> $OUTPUT
 
